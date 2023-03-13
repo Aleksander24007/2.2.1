@@ -10,34 +10,33 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class MainApp {
-   public static void main(String[] args) throws SQLException {
-      AnnotationConfigApplicationContext context = 
-            new AnnotationConfigApplicationContext(AppConfig.class);
+    public static void main(String[] args) throws SQLException {
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(AppConfig.class);
 
-      UserService userService = context.getBean(UserService.class);
-
-
-      userService.add(new User("User1", "Lastname1", "user1@mail.ru"));
-//      userService.add(new User("User2", "Lastname2", "user2@mail.ru", new Car("porse", 1)));
-//      userService.add(new User("User3", "Lastname3", "user3@mail.ru", new Car("Volga", 234)));
-//      userService.add(new User("User4", "Lastname4", "user4@mail.ru", new Car("Lada", 567)));
+        UserService userService = context.getBean(UserService.class);
 
 
+        userService.add(new User("User1", "Lastname1", "user1@mail.ru", new Car("bmw", 1234)));
+        userService.add(new User("User2", "Lastname2", "user2@mail.ru", new Car("porse", 1)));
+        userService.add(new User("User3", "Lastname3", "user3@mail.ru", new Car("Volga", 234)));
+        userService.add(new User("User4", "Lastname4", "user4@mail.ru", new Car("Lada", 567)));
 
-      List<User> users = userService.listUsers();
-      for (User user : users) {
-         System.out.println("Id = "+user.getId());
-         System.out.println("First Name = "+user.getFirstName());
-         System.out.println("Last Name = "+user.getLastName());
-         System.out.println("Email = "+user.getEmail());
-//         System.out.println("Model  = " + user.getCar().getModel());
-//         System.out.println("Series = " + user.getCar().getSeries());
-         System.out.println();
-      }
 
-//      User porse = userService.getMyCar("porse", 1);
-//      System.out.println(porse);
+        List<User> users = userService.listUsers();
+        for (User user : users) {
+            System.out.println("Id = " + user.getId());
+            System.out.println("First Name = " + user.getFirstName());
+            System.out.println("Last Name = " + user.getLastName());
+            System.out.println("Email = " + user.getEmail());
+            System.out.println("Model  = " + user.getCar().getModel());
+            System.out.println("Series = " + user.getCar().getSeries());
+            System.out.println();
+        }
 
-      context.close();
-   }
+        User porse = userService.getMyCar("porse", 1);
+        System.out.println(porse);
+
+        context.close();
+    }
 }
